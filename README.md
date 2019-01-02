@@ -1,4 +1,4 @@
-<bold>Project Title</bold>
+<title>Project Title</title>
 One Paragraph of project description goes here
 
 Getting Started
