@@ -1,4 +1,9 @@
-<title>Project Title</title>
+<!DOCTYPE html>
+<html>
+<head>Project Title</head>  
+ </html>
+  
+
 One Paragraph of project description goes here
 
 Getting Started
