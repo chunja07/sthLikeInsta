@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try{
-                            URL endPoint = new URL("http://192.168.0.26:8080/JS/android/login");
+                            URL endPoint = new URL("http://192.168.0.19:8080/JS/android/login");
                             HttpURLConnection myConnection = (HttpURLConnection) endPoint.openConnection();
 
                             String id = input_login_id.getText().toString();

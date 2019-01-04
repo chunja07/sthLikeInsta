@@ -8,9 +8,17 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.renderscript.ScriptGroup;
+import android.support.annotation.NonNull;
+import android.support.design.bottomappbar.BottomAppBar;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
@@ -41,26 +49,62 @@ public class UserActivity extends AppCompatActivity {
     final static String LOG_TAG =  "KNKUserDoing";
     public static final String MyPREFERENCES = "MyPrefs";
 
-    TextView output_id;
-    ImageView user_ImageView;
-    ImageView user_ImageView2;
+    private HomeFragment homeFragment;
+    private UserFragment userFragment;
+    private SearchFragment searchFragment;
+    private ConfigureFragment configureFragment;
+    private String member_gson;
+
+    BottomNavigationView bottomNavView;
+    TextView user_id;
+    ImageView user_image;
     Button btn_logout;
 
 
+
+
     public void initRefs(){
+
         Gson gson = new Gson();
 
-        output_id = (TextView) findViewById(R.id.output_id);
-        btn_logout = (Button) findViewById(R.id.btn_logout);
-        user_ImageView = (ImageView) findViewById(R.id.user_ImageView);
-        user_ImageView2 = (ImageView) findViewById(R.id.user_ImageView2);
+        SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        member_gson = sharedPreferences.getString("info", null);
+        final Member member = gson.fromJson(member_gson, Member.class);
+
+        homeFragment = new HomeFragment();
+        userFragment = new UserFragment();
+        searchFragment = new SearchFragment();
+        configureFragment = new ConfigureFragment();
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        String buffer = sharedPreferences.getString("info", null);
-        final Member member = gson.fromJson(buffer, Member.class);
+        bottomNavView = (BottomNavigationView) findViewById(R.id.bottomNavView);
 
+        bottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.search:
+                        setFragment(searchFragment);
+                        return true;
+                    case R.id.hommy:
+                        setFragment(homeFragment);
+                        return true;
+                    case R.id.user:
+                        setFragment(userFragment);
+                        UserFragment userFragment = (UserFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentFrame);
+
+                        return true;
+                    case R.id.configure:
+                        setFragment(configureFragment);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+
+        /*
         try {
             if (member.getMember_id() != null) {
                 output_id.setText(member.getMember_id());
@@ -73,7 +117,7 @@ public class UserActivity extends AppCompatActivity {
 
                             Bitmap bitmap;
 
-                            URL endPoint = new URL("http://192.168.0.26:8080");
+                            URL endPoint = new URL("http://192.168.0.19:8080");
                             String filePath = new String(member.getMember_profile_pic());
                             URL filePoint = new URL(endPoint.toString() + filePath);
                             Log.d(LOG_TAG, "filePoint" + filePoint);
@@ -103,8 +147,9 @@ public class UserActivity extends AppCompatActivity {
         } catch(Exception e){
             e.printStackTrace();
         }
+        */
     }
-
+    /*
     public void setEvents(){
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -120,15 +165,24 @@ public class UserActivity extends AppCompatActivity {
 
             }
         });
-
     }
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
         initRefs();
-        setEvents();
-
+        // setEvents();
+        setFragment(homeFragment);
     }
+
+    private void setFragment(Fragment fragment){
+        Bundle bundle = new Bundle(1);
+        bundle.putString("member", member_gson);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentFrame, fragment);
+        fragment.setArguments(bundle);
+        fragmentTransaction.commit();
+    }
+
 }
