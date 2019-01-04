@@ -1,6 +1,9 @@
 package com.example.a402_24.day_03_register;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -28,6 +31,7 @@ import java.net.URL;
  */
 public class UserFragment extends Fragment {
     final static String LOG_TAG =  "KNKUserDoing";
+    public static final String MyPREFERENCES = "MyPrefs";
 
     TextView user_id;
     ImageView user_image;
@@ -46,7 +50,6 @@ public class UserFragment extends Fragment {
 
         String member_Str = getArguments().getString("member");
         final Member member = gson.fromJson(member_Str, Member.class);
-
 
         if (member.getMember_id() != null) {
             user_id.setText(member.getMember_id());
@@ -84,6 +87,20 @@ public class UserFragment extends Fragment {
         } else {
             return;
         }
+
+        user_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), Before_Register.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public UserFragment() {
