@@ -7,38 +7,154 @@
     tools:context=".UserFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="39dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="40dp"
             android:text="TextView"
+            android:textAlignment="center"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/user_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@+id/user_id"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="194dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/user_id"
-            tools:src="@tools:sample/avatars" />
+            tools:layout_editor_absoluteX="0dp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/user_image"
+                android:layout_width="98dp"
+                android:layout_height="98dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_id" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="15dp"
+                        android:text="팔로워"
+                        android:textAlignment="center"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toBottomOf="@+id/follower_num" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="35dp"
+                        android:layout_marginTop="15dp"
+                        android:text="팔로우"
+                        android:textAlignment="center"
+                        app:layout_constraintStart_toEndOf="@+id/textView9"
+                        app:layout_constraintTop_toBottomOf="@+id/followed_num" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="35dp"
+                        android:layout_marginTop="15dp"
+                        android:text="게시물"
+                        android:textAlignment="center"
+                        app:layout_constraintStart_toEndOf="@+id/textView10"
+                        app:layout_constraintTop_toBottomOf="@+id/board_num" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/follower_num"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="10dp"
+                        android:text="100"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/followed_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="34dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="100"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/follower_num"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/board_num"
+                        android:layout_width="34dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="47dp"
+                        android:layout_marginTop="10dp"
+                        android:text="100"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        app:layout_constraintStart_toEndOf="@+id/followed_num"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/introduction"
+                    android:layout_width="185dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:text="자기소개"
+                    android:textAlignment="textStart"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="382dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/user_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="46dp"
             android:text="Logout"
+            android:layout_marginTop="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.537"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+
+
+    </LinearLayout>
 </FrameLayout>

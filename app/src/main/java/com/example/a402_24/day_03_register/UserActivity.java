@@ -26,6 +26,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -54,6 +55,7 @@ public class UserActivity extends AppCompatActivity {
     private SearchFragment searchFragment;
     private ConfigureFragment configureFragment;
     private String member_gson;
+    private Member member;
 
     BottomNavigationView bottomNavView;
     TextView user_id;
@@ -61,22 +63,18 @@ public class UserActivity extends AppCompatActivity {
     Button btn_logout;
 
 
-
-
-    public void initRefs(){
+     public void initRefs(){
 
         Gson gson = new Gson();
 
         SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         member_gson = sharedPreferences.getString("info", null);
-        final Member member = gson.fromJson(member_gson, Member.class);
+        member = gson.fromJson(member_gson, Member.class);
 
         homeFragment = new HomeFragment();
         userFragment = new UserFragment();
         searchFragment = new SearchFragment();
         configureFragment = new ConfigureFragment();
-
-
 
         bottomNavView = (BottomNavigationView) findViewById(R.id.bottomNavView);
 
@@ -166,6 +164,10 @@ public class UserActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
